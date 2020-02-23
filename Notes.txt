@@ -30,7 +30,10 @@ State in Function based Component
 *	It returns An array with 2 elements in it. 
 *	One returns current state of the component
 *	Second returns function to change the state.
-
+*	The set***state method in UseState replaces the entire object ( it's not merging like this.setState())
+*	So when we have more then one object in UseState , we need to manually merge them. 
+							( or )
+* Multiple UseState() calls are allowed
 
 ======================================================================================================
 

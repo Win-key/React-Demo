@@ -11,12 +11,19 @@ const App = props=> {
     otherState : 'something else'
   });  
 
+  const [ otherState, setOtherState] = useState({
+    otherState : 'something else'
+  });  
+
   const switchNameHandler = () => {
     console.log('Was clicked');
     setPersonState({person : [
       {name : 'Venkatesh', age : 23} 
     ]});
   }
+
+  console.log(personState, otherState);
+  
     return (
       <div className="App">
         <h1>Hi.. I'm WinKey...</h1>
