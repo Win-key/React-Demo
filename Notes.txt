@@ -1,0 +1,10 @@
+React Learning: 
+===============
+
+JSX should have one parent element. 
+
+Property binding : <Person name="Winkey" age="24"/> 							Read using : Props (function based comp) or this.name in class based comp
+
+Eq to ng-content :  <Person name="Winkey" age="24">Let's rock buddy</Person>	Read using : props.children
+
+If we want to use any kind of static html , we can use props.children
