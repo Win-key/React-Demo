@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Person from './Person/Person'
 
 function App() {
   return (
     <div className="App">
+      <h1>Hi.. I'm WinKey...</h1>
+      <Person name="Winkey" age="24">Let's rock buddy</Person>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
