@@ -23,6 +23,13 @@ State
 
 *** State cannot be changed directly. React offers spl method. ** this.setState({newObject})
 
+State in Function based Component
+=================================
+
+*	UseState from react is used
+*	It returns An array with 2 elements in it. 
+*	One returns current state of the component
+*	Second returns function to change the state.
 
 
 ======================================================================================================
