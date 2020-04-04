@@ -36,20 +36,22 @@ class App extends Component {
   }
 
   render(){
+
+    let person = null;
+    if(this.state.showPerson){
+      person = (<div>
+        <Person name={this.state.person[0].name} age={this.state.person[0].age} >Let's rock buddy</Person>
+        <Person name={this.state.person[0].name} age={this.state.person[0].age} >Second Component</Person>
+        <input type='text' onChange={this.onChangeHandler}/>
+        <Person name={this.state.person[1].name} age={this.state.person[1].age} >Two way bind Component</Person>
+        </div>);
+    }
+
     return (
       <div className="App">
         <h1>Hi.. I'm WinKey...</h1>
         <button onClick={this.toggleHandler}>Toggle Persons</button>
-        {
-          this.state.showPerson ? 
-          <div>
-          <Person name={this.state.person[0].name} age={this.state.person[0].age} >Let's rock buddy</Person>
-          <Person name={this.state.person[0].name} age={this.state.person[0].age} >Second Component</Person>
-          <input type='text' onChange={this.onChangeHandler}/>
-          <Person name={this.state.person[1].name} age={this.state.person[1].age} >Two way bind Component</Person>
-          </div>
-          : null
-        }
+        {person}
       </div>
     );
   };
