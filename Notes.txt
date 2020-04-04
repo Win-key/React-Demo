@@ -56,3 +56,34 @@ When I want to pass a FUNCTION to a component from parent(HTML) to child I shoul
 		Or
 We can use an anonymous arrow function, but this is inefficiant .bind(...) is recommanded 
  <Person name="Winkey" age="24" onClick={()=>this.switchName(...)}/>
+
+
+======================
+CSS
+===
+Css is imported into js to bring it into the game
+
+Inline Style
+============
+Inline style can be applied using style property of the component
+
+const styleObj = {
+    backgroundColor : #ccc,
+    cursor : "pointer"
+}
+<Person style={styleObj} ... />
+
+Dynamic Content in JSX
+======================
+
+JSX will allow ternary operator.
+        {
+          this.state.showPerson ? 
+          <div>
+            <Person name={this.state.person[0].name} age={this.state.person[0].age} >Let's rock buddy</Person>
+          </div>
+          : null
+        }
+
+But keeping your condition inside the JSX is not a good idea.
+
