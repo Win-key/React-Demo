@@ -7,8 +7,9 @@ class App extends Component {
 
   state = {
     person : [
-      {name : 'Winkey', age : 23},
-      {name : 'Dynamic', age : 5}
+      {name : 'Winkey', age : 24},
+      {name : 'Dynamic', age : 5},
+      {name : 'she', age : 24}
     ],
     otherState : 'something else',
     showPerson : false
@@ -39,12 +40,13 @@ class App extends Component {
 
     let person = null;
     if(this.state.showPerson){
-      person = (<div>
-        <Person name={this.state.person[0].name} age={this.state.person[0].age} >Let's rock buddy</Person>
-        <Person name={this.state.person[0].name} age={this.state.person[0].age} >Second Component</Person>
-        <input type='text' onChange={this.onChangeHandler}/>
-        <Person name={this.state.person[1].name} age={this.state.person[1].age} >Two way bind Component</Person>
-        </div>);
+      person = <div>
+        {
+          this.state.person.map(person => {
+            return <Person name={person.name} age={person.age} ></Person>
+          })
+        }
+        </div>;
     }
 
     return (
