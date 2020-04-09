@@ -46,13 +46,13 @@ class App extends Component {
   render(){
 
     let style = {
-      marginLeft : '25%',
+      textAlign : 'center',
       marginTop : '25px'
     }
-
+    let childStyle = {display:'inline-block'};
     let person = null;
     if(this.state.showPerson){
-      person = <div style = {style}>
+      person = <div style = {style}><div style={childStyle}>
         {
           this.state.person.map(person => {
             return <Person 
@@ -64,7 +64,7 @@ class App extends Component {
                 ></Person>
           })
         }
-        </div>;
+        </div></div>;
     }
 
     return (
