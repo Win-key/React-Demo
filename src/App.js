@@ -2,6 +2,7 @@ import React,{Component} from 'react';//, { Component }
 //import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person'
+import Radium,{StyleRoot} from 'radium';
 
 class App extends Component {
 
@@ -68,11 +69,13 @@ class App extends Component {
     }
 
     return (
+      <StyleRoot>
       <div className="App">
         <h1>Hi.. I'm WinKey...</h1>
         <button onClick={this.toggleHandler}>Toggle Persons</button>
         {person}
       </div>
+      </StyleRoot>
     );
   };
 }
