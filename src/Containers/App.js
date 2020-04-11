@@ -1,9 +1,9 @@
-import React,{Component} from 'react';//, { Component }
+import React,{Component} from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person'
 // import Radium,{StyleRoot} from 'radium';
-
+import Persons from '../Persons/Persons'
+import BoilerPlate from '../BoilerPlate/BoilerPlate'
 class App extends Component {
 
   state = {
@@ -45,35 +45,16 @@ class App extends Component {
   }
 
   render(){
-
-    let style = {
-      textAlign : 'center',
-      marginTop : '25px'
-    }
-    let childStyle = {display:'inline-block'};
-    let person = null;
-    if(this.state.showPerson){
-      person = <div style = {style}><div style={childStyle}>
-        {
-          this.state.person.map(person => {
-            return <Person 
-                key={person.id} 
-                name={person.name} 
-                age={person.age} 
-                delete={()=>this.deletePersonHandler(person.id)}
-                change={(event)=>this.onChangeHandler(event,person.id)}
-                ></Person>
-          })
-        }
-        </div></div>;
-    }
-
     return (
       // <StyleRoot>
       <div className="App">
-        <h1>Hi.. I'm WinKey...</h1>
-        <button onClick={this.toggleHandler}>Toggle Persons</button>
-        {person}
+        <BoilerPlate toggle={this.toggleHandler}/>
+        <Persons 
+          showPerson={this.state.showPerson}
+          persons = {this.state.person}
+          delete = {this.deletePersonHandler}
+          change = {this.onChangeHandler}
+        />
       </div>
       // </StyleRoot>
     );
