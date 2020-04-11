@@ -87,3 +87,88 @@ JSX will allow ternary operator.
 
 But keeping your condition inside the JSX is not a good idea.
 
+React - Component Life Cycle 
+============================
+create
+=======
+
+LifeCycle                            || Desc                      || Do's                     || Don'ts  
+==========                              =====                       ======                       =======
+constructor(props)                   || should call super(props)  || Set up state             || Side Effects
+
+getDerivedStateFromProps(props,state)||                           || Sync state               || Side Effects
+
+render()                             || Prepare and structure jSX ||                        
+
+Render child components              || 
+
+componentDidMount()                  || Component Get created     ||  Side Effects            || Updating state , This cause the re-render
+
+componentWillMount()                 || Legacy Hook
+
+Update for props changes
+========================
+
+getDerivedStateFromProps(props,state)||                           || Sync state               || Side Effects
+
+shouldComponentUpdate(nextProps      || we can stop the render    || Decide continue or not   || Side Effects
+                      nextState)        process if needed         
+
+render()
+
+Update child component props
+
+getSnapshotBeforeUpdate(prevProps,  ||                            || Last min DOM options      || Side Effects
+                        prevState)
+
+componentDidUpdate()                ||                            || Side Effects              || State changes
+
+componentWillReceiveProps()         || Legacy
+
+componentWillUpdate()               || Legacy
+
+Update for state changes
+=========================
+
+componentwillunmount
+====================
+  * similar to ngDestroy
+  * Will get called once the component get destroyed
+In functional component
+=======================
+
+useEffect()
+===========
+
+  * Not a life cycle method,
+  * But it is a combination of componentDidMount() and componentDidUpdate()
+  * Execute on every change in state
+  * we can have multiple useEffect as per our choise
+
+  useEffect(()=>{
+    //logic goes here
+    return ()=>{
+      //code that should run when component get destroyed
+    }
+  },[]); // No dependency.. run only once when component gets created
+
+useEffect(()=>{
+    //logic goes here
+    return ()=>{
+      //code that should run when component get destroyed
+    }
+  },[props.person,....]);// Run whenever dependencies changes
+
+
+  shouldComponentUpdate vs React.memo(Person)
+  ===========================================
+
+  shouldComponentUpdate --> is used in class based component and used for optimization and avoid unnecessary re-rendering
+
+  React.memo(...) on other hand work in functional component and only re-render when input changes
+
+  PureComponent
+  ==============
+  * PureComponent is an extended version of Component
+  * Instead of using shouldComponentUpdate with every props check in it,
+     PureComponent internally does it.
