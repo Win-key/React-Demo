@@ -172,3 +172,105 @@ useEffect(()=>{
   * PureComponent is an extended version of Component
   * Instead of using shouldComponentUpdate with every props check in it,
      PureComponent internally does it.
+
+  How rendering happens in React
+  ==============================
+  * When render() gets called , It doesn't change the real DOM directly.
+  * Instead it uses vitual DOM.
+  * It has a copy of Old V-DOM and a new Rendered V-DOM
+  * And It compare for changes between them and only touches the real DOM if changes detected.
+
+  Higher Order Components
+  =======================
+  * Components that hold another component
+  * Can be used for wrapping the JSX code.
+  * A HOC will look like this,
+
+  aux.js 
+  ======
+  const aux = props => props.children;
+  export default aux;
+
+  render(
+    <Aux>
+      <p></p>
+      ...
+      ...
+      ...
+    </Aux>
+  );
+  
+  ** React.Fragment also can be used in the Place of Aux
+
+  Higher Order Components can be written in two ways
+    * return as a component
+        
+        const hoc = props => (
+          <div className={props.classes}>{props.children}</div>
+        )
+
+        export default hoc;
+
+        <Hoc className={classes}>
+          ...
+          ...
+          ...
+        </Hoc>
+
+    * return as a function that returns a component
+
+      const hoc = (WrappedComponent, classes)=>{
+        return props=>(
+          <div className={classes}>
+            <WrappedComponent {...props}/>
+          </div>
+        )
+      }
+
+      It can be used while exporting the component
+
+        export default hoc(App, classes);
+
+  Best Practice in State
+  ======================
+
+  this.setState((prevState, props)=>{
+      return{showPerson : !prevState.showPerson};
+    });
+  
+  PropTypes
+  =========
+
+  PropTypes is a third party package, that restricts props are used incorrectly.
+
+  Person.propTypes = {
+    click : PropTypes.func,
+    name : PropTypes.string,
+    age : PropTypes.number,
+    change : PropTypes.string
+  }
+
+  Using Ref
+  =========
+
+  Two ways to Use ref 
+  
+  Way 1 :
+    <input ref={(inputEl)=>{this.inputEl = inputEl}} />
+
+    in componentDidMount
+
+    componentDidMount(){
+      this.inputEl.focus();
+    }
+
+  Way 2 :
+    constructor(props){
+      super(props);
+      this.inputElRef = React.createRef();
+    }
+
+    componentDidMount(){
+      this.inputElRef.current.focus();
+    }
+    <input ref={this.inputElRef} />

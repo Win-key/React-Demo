@@ -1,4 +1,5 @@
-import React from 'react';
+import React , {useEffect, useRef, useContext} from 'react';
+import AuthContext from '../../context/AuthContext'
 //import Radium from 'radium';
 import styled from 'styled-components';
 
@@ -17,7 +18,14 @@ const StyledDiv = styled.div`
         width : 450px;
     }
 `;
-const person = (props) => {
+const Person = (props) => {
+
+    const inputRef = useRef(null);
+    const authContext = useContext(AuthContext);
+
+    useEffect(()=>{
+        inputRef.current.focus();
+    },[]);
     // let style = {
     //     width : '400px',
     //     border : '1px solid black',
@@ -37,11 +45,12 @@ const person = (props) => {
     return (
         
     <StyledDiv>
+        {authContext.auth ? <p>Authorized</p> : <p>Not Authorized</p>}
         <p onClick={props.delete}>Name : {props.name}! and Age : {props.age} years old.</p>
-        <input  type="text" onChange={props.change} placeholder="Change the Person Name here..." width="200" />
+        <input  ref={inputRef}type="text" onChange={props.change} placeholder="Change the Person Name here..." width="200" />
     </StyledDiv>
     );
 };
 
-export default person;
+export default Person;
 //export default Radium(person);

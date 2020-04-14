@@ -4,6 +4,7 @@ import './App.css';
 // import Radium,{StyleRoot} from 'radium';
 import Persons from '../Persons/Persons'
 import BoilerPlate from '../BoilerPlate/BoilerPlate'
+import AuthContext from '../context/AuthContext'
 class App extends Component {
 
   state = {
@@ -13,7 +14,8 @@ class App extends Component {
       {id : 'jklasd', name : 'Undefined', age : 24}
     ],
     otherState : 'something else',
-    showPerson : false
+    showPerson : false,
+    auth : false
   };
   /*const [ personState, setPersonState] = useState({
     person : [
@@ -27,14 +29,18 @@ class App extends Component {
   });*/  
 
   toggleHandler = () => {
-    this.setState({showPerson : !this.state.showPerson});
+    this.setState((prevState, props)=>{
+      return{showPerson : !prevState.showPerson}
+    });
   };
 
   onChangeHandler = (event, id)=>{
     let changeIndex = this.state.person.findIndex(e=>e.id===id);
     let persons = [...this.state.person];
     persons[changeIndex].name=event.target.value; 
-    this.setState({person : persons});
+    this.setState((prevState, props)=>{
+      return {person : persons}
+    });
   }
 
   deletePersonHandler = (id)=>{
@@ -43,12 +49,18 @@ class App extends Component {
       person : persons
     });
   }
+  loginHandler = ()=>{
+    this.setState((prevState, props)=>{
+      return {auth : !prevState.auth}
+    });
+  }
 
   render(){
     return (
       // <StyleRoot>
+      <AuthContext.Provider value={{auth : this.state.auth, login : this.loginHandler }}>
       <div className="App">
-        <BoilerPlate toggle={this.toggleHandler}/>
+        <BoilerPlate toggle={this.toggleHandler} />
         <Persons 
           showPerson={this.state.showPerson}
           persons = {this.state.person}
@@ -56,7 +68,7 @@ class App extends Component {
           change = {this.onChangeHandler}
         />
       </div>
-      // </StyleRoot>
+      </AuthContext.Provider>
     );
   };
 }
